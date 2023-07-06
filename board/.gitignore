@@ -1,0 +1,20 @@
+# IDE/Editor specific
+.gradle/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Build output
+/build/
+/classes/
+/*.jar
+
+# Dependencies
+/lib/
+
+# Logs
+/logs/
+
+# Gradle wrapper
+/gradle/wrapper/gradle-wrapper.jar
