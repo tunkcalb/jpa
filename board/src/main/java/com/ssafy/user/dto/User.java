@@ -2,8 +2,10 @@ package com.ssafy.user.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.persistence.Entity;
 
-public class UserDto {
+@Entity(name="user")
+public class User {
 
     @NotBlank(message = "아이디를 입력해주세요.")
     @Pattern(regexp = "^[a-z0-9]{6,20}", message = "아이디는 6~20자의 영문 소문자, 숫자만 사용 가능합니다.")
