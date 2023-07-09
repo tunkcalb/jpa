@@ -1,11 +1,9 @@
 package com.ssafy.user.service;
 
-import com.ssafy.user.dto.User;
-
-import java.util.Optional;
+import com.ssafy.user.dto.UserDto;
 
 public interface UserService {
-    User joinUser(User userDto) throws Exception;
+    UserDto joinUser(String userName, String password) throws Exception;
 
-    boolean login(User user);
+    boolean login(String userName, String password);
 }

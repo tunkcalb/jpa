@@ -1,6 +1,7 @@
 package com.ssafy.user.service;
 
-import com.ssafy.user.dto.User;
+import com.ssafy.user.dto.UserDto;
+import com.ssafy.user.entity.User;
 import com.ssafy.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,17 +19,21 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User joinUser(User user) throws Exception {
-        return repository.save(user);
+    public UserDto joinUser(String userName, String password) throws Exception {
+        User user = new User(userName, password);
+        User saveUser = repository.save(user);
+        UserDto userDto = new UserDto(saveUser.getUsername(), saveUser.getPassword());
+        return userDto;
     }
 
     @Override
-    public boolean login(User user) {
-        Optional<User> findUser = repository.findById(user.getUsername());
-        if(!user.getUsername().equals(findUser.get().getUsername())){
+    public boolean login(String userName, String password) {
+        Optional<User> findUser = repository.findById(userName);
+        User user = findUser.get();
+        if(!user.getUsername().equals(userName)){
             return false;
         }
-        else if (!user.getPassword().equals(findUser.get().getPassword())){
+        else if (!user.getPassword().equals(password)){
             return false;
         }
         return true;

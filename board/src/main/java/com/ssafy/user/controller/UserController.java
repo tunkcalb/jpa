@@ -1,19 +1,14 @@
 package com.ssafy.user.controller;
 
-import com.ssafy.user.dto.User;
+import com.ssafy.user.dto.UserDto;
 import com.ssafy.user.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
 public class UserController {
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
     private UserService userService;
 
     @Autowired
@@ -28,10 +23,11 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public boolean join(@RequestBody User user) {
-        logger.debug("userDto info : {}", user);
+    public boolean join(@RequestBody UserDto user) {
+        String userName = user.getUsername();
+        String password = user.getPassword();
         try {
-            userService.joinUser(user);
+            userService.joinUser(userName, password);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -41,7 +37,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public boolean login(@RequestBody User user) {
-        return userService.login(user);
+    public boolean login(@RequestBody UserDto user) {
+        String userName = user.getUsername();
+        String password = user.getPassword();
+        return userService.login(userName, password);
     }
 }
