@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.13'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'io.freefair.lombok' version '4.1.6'
 }
 
 group = 'com.ssafy.'
@@ -16,13 +17,17 @@ repositories {
 }
 
 dependencies {
+	//mysql
+	implementation 'mysql:mysql-connector-java:8.0.26'
+	//entity
 	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'org.hibernate:hibernate-core:5.5.7.Final'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'com.github.joutvhu:spring-dynamic-jpa:3.0.7'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.projectlombok:lombok:1.18.22'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 

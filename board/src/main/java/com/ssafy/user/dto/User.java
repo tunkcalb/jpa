@@ -1,12 +1,22 @@
 package com.ssafy.user.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.persistence.Entity;
 
-@Entity(name="user")
+
+@Entity
+@Getter
+@Setter
+@Table(name = "user")
 public class User {
 
+    @Id
     @NotBlank(message = "아이디를 입력해주세요.")
     @Pattern(regexp = "^[a-z0-9]{6,20}", message = "아이디는 6~20자의 영문 소문자, 숫자만 사용 가능합니다.")
     private String username;

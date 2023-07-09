@@ -7,6 +7,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
@@ -20,14 +22,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/join")
-    public void join(@RequestBody User userDto) {
-        logger.debug("userDto info : {}", userDto);
-        try {
-            userService.joinUser(userDto);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @GetMapping("/")
+    public boolean root() {
+        return true;
     }
 
+    @PostMapping("/join")
+    public boolean join(@RequestBody User user) {
+        logger.debug("userDto info : {}", user);
+        try {
+            userService.joinUser(user);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    @PostMapping("/login")
+    public boolean login(@RequestBody User user) {
+        return userService.login(user);
+    }
 }
