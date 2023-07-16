@@ -5,6 +5,8 @@ import com.ssafy.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/user")
 @CrossOrigin("*")
@@ -23,17 +25,17 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public boolean join(@RequestBody UserDto user) {
+    public String join(@RequestBody @Valid UserDto user) {
         String userName = user.getUsername();
         String password = user.getPassword();
         try {
-            userService.joinUser(userName, password);
-            return true;
+            UserDto userDto = userService.joinUser(userName, password);
+            return userDto.getUsername();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println(e.getMessage());
         }
-        return false;
+        return "false";
     }
 
     @PostMapping("/login")

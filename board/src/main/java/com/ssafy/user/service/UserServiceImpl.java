@@ -22,18 +22,17 @@ public class UserServiceImpl implements UserService{
     public UserDto joinUser(String userName, String password) throws Exception {
         User user = new User(userName, password);
         User saveUser = repository.save(user);
-        UserDto userDto = new UserDto(saveUser.getUsername(), saveUser.getPassword());
+        UserDto userDto = new UserDto(saveUser.getUserName(), saveUser.getPassword());
         return userDto;
     }
 
     @Override
     public boolean login(String userName, String password) {
-        Optional<User> findUser = repository.findById(userName);
-        User user = findUser.get();
-        if(!user.getUsername().equals(userName)){
+        User findUser = repository.findByUserName(userName);
+        if(!findUser.getUserName().equals(userName)){
             return false;
         }
-        else if (!user.getPassword().equals(password)){
+        else if (!findUser.getPassword().equals(password)){
             return false;
         }
         return true;
