@@ -26,10 +26,10 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(@RequestBody @Valid UserDto user) {
-        String userName = user.getUsername();
+        String username = user.getUsername();
         String password = user.getPassword();
         try {
-            UserDto userDto = userService.joinUser(userName, password);
+            UserDto userDto = userService.joinUser(username, password);
             return userDto.getUsername();
         } catch (Exception e) {
             e.printStackTrace();
